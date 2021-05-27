@@ -10,8 +10,6 @@ import shutil
 # /_________________________________________________________________________________________________________/
 # This thing is an eyesore, so i left plenty of comments.
 
-os.system("clear")
-
 
 class Matrix:
     def __init__(self):
@@ -163,24 +161,28 @@ class Matrix:
             for char in thing:
                 # 1/6 chance to change a character:
                 if len(char) == 22 and random.randint(0, 5) == 3:
+                    # Split the escape code from the char to preserve it's color.
                     char = char[:21] + char[22:]
                     char = char[:21] + chars[random.randint(0, len(chars) - 1)]
+                    # Replace the char in the list
                     thing.pop(timer)
                     thing.insert(timer, char)
                 elif len(char) == 23 and random.randint(0, 5) == 3:
+                    # Same as above but with the escape code being triple digits.
                     char = char[:22] + char[23:]
                     char = char[:22] + chars[random.randint(0, len(chars) - 1)]
                     thing.pop(timer)
                     thing.insert(timer, char)
+                # Add the char to the result.
                 result = result + char
                 timer += 1
             # Clump it all together so you don't have *as bad* performance.
+            # Add new line to not butcher odd columned screens
             result = result + "\n"
 
+        os.system("clear")    
         print(result)
-
-        time.sleep(0.06)
-        os.system("clear")
+        time.sleep(0.05)
 
 
 Matrix()
